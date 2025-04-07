@@ -11,3 +11,9 @@ data class RecommendedPlace(
     @DrawableRes val placesImageBanner: Int,
     @StringRes val placeDetails: Int
 )
+
+//data class Category(
+//    val id: Int,
+//    @StringRes val titleResourceId: Int,
+//    @DrawableRes val imageResourceId: Int,
+//)
