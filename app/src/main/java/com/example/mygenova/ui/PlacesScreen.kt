@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -21,6 +22,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -58,6 +60,7 @@ import com.example.mygenova.model.RecommendedPlace
 import com.example.mygenova.ui.theme.MyGenovaTheme
 import com.example.mygenova.utils.ContentType
 
+
 @Composable
 fun RecommendedPlacesApp(
     windowSize: WindowWidthSizeClass,
@@ -66,9 +69,7 @@ fun RecommendedPlacesApp(
     val viewModel: RecommendedPlacesViewModel = viewModel()
     val uiState by viewModel.uiState.collectAsState()
     val contentType = when (windowSize) {
-        WindowWidthSizeClass.Compact,
-        WindowWidthSizeClass.Medium -> ContentType.ListOnly
-
+        WindowWidthSizeClass.Compact, WindowWidthSizeClass.Medium -> ContentType.ListOnly
         WindowWidthSizeClass.Expanded -> ContentType.ListAndDetail
         else -> ContentType.ListOnly
     }
@@ -77,12 +78,25 @@ fun RecommendedPlacesApp(
         topBar = {
             RecommendedPlacesAppBar(
                 isShowingListPage = uiState.isShowingListPage,
-                onBackButtonClick = { viewModel.navigateToListPage() },
-                windowSize = windowSize
+                onBackButtonClick = {
+                    if (!uiState.isShowingListPage) {
+                        viewModel.navigateToListPage()
+                    } else {
+                        viewModel.selectCategory(null)  // go back to category selection
+                    }
+                },
+                windowSize = windowSize,
+                category = uiState.category
             )
         }
     ) { innerPadding ->
-        if (contentType == ContentType.ListAndDetail) {
+        if (uiState.category == null) {
+            CategorySelectionScreen(
+                modifier = Modifier.padding(innerPadding)
+            ) { selectedCategory ->
+                viewModel.selectCategory(selectedCategory)
+            }
+        } else if (contentType == ContentType.ListAndDetail) {
             RecommendedPlacesListAndDetail(
                 RecommendedPlaces = uiState.RecommendedPlacesList,
                 selectedRecommendedPlace = uiState.currentRecommendedPlace,
@@ -117,6 +131,28 @@ fun RecommendedPlacesApp(
     }
 }
 
+@Composable
+fun CategorySelectionScreen(
+    modifier: Modifier = Modifier,
+    onCategorySelected: (PlaceCategory) -> Unit
+) {
+    Column(modifier = modifier.padding(16.dp)) {
+        Text("Select a category", style = MaterialTheme.typography.headlineSmall)
+        Spacer(modifier = Modifier.height(16.dp))
+        PlaceCategory.values().forEach { category ->
+            Button(
+                onClick = { onCategorySelected(category) },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 4.dp)
+            ) {
+                Text(category.name.replace(Regex("([a-z])([A-Z])"), "$1 $2"))
+            }
+        }
+    }
+}
+
+
 /**
  * Composable that displays the topBar and displays back button if back navigation is possible.
  */
@@ -126,14 +162,16 @@ fun RecommendedPlacesAppBar(
     onBackButtonClick: () -> Unit,
     isShowingListPage: Boolean,
     windowSize: WindowWidthSizeClass,
+    category: PlaceCategory?,
     modifier: Modifier = Modifier
 ) {
-    val isShowingDetailPage = windowSize != WindowWidthSizeClass.Expanded && !isShowingListPage
+    val isBackButtonVisible = windowSize != WindowWidthSizeClass.Expanded && (category != null)
+
     TopAppBar(
         title = {
             Text(
                 text =
-                if (isShowingDetailPage) {
+                if (isBackButtonVisible) {
                     stringResource(R.string.detail_fragment_label)
                 } else {
                     stringResource(R.string.list_fragment_label)
@@ -141,7 +179,7 @@ fun RecommendedPlacesAppBar(
                 fontWeight = FontWeight.Bold
             )
         },
-        navigationIcon = if (isShowingDetailPage) {
+        navigationIcon = if (isBackButtonVisible) {
             {
                 IconButton(onClick = onBackButtonClick) {
                     Icon(
@@ -305,6 +343,7 @@ private fun RecommendedPlacesDetail(
                         modifier = Modifier
                             .padding(horizontal = dimensionResource(R.dimen.padding_small))
                     )
+
                 }
             }
             Text(
