@@ -1,0 +1,63 @@
+<resources>
+    <string name="app_name">My Genova App</string>
+    <string name="list_fragment_label">Places in Genova</string>
+    <string name="detail_fragment_label">Place Details</string>
+    <string name="back_button">Back</string>
+
+    <!-- Coffee Shops -->
+    <string name="coffee_tazze_pazze_title">Tazze Pazze</string>
+    <string name="coffee_tazze_pazze_subtitle">Trendy espresso bar</string>
+    <string name="coffee_tazze_pazze_details">Tazze Pazze is a trendy espresso bar known for its rich coffee blends and stylish interior.</string>
+
+    <string name="coffee_ostello_bello_title">Ostello Bello</string>
+    <string name="coffee_ostello_bello_subtitle">Casual cafe with workspace vibes</string>
+    <string name="coffee_ostello_bello_details">Ostello Bello offers a relaxed atmosphere, perfect for working or meeting friends over coffee.</string>
+
+    <string name="coffee_cafe_frida_title">Cafè Frida</string>
+    <string name="coffee_cafe_frida_subtitle">Charming local spot</string>
+    <string name="coffee_cafe_frida_details">Cafè Frida is a charming local gem known for its cozy ambiance and great espresso.</string>
+
+    <!-- Restaurants -->
+    <string name="restaurant_rosmarino_title">Trattoria Rosmarino</string>
+    <string name="restaurant_rosmarino_subtitle">Authentic Ligurian cuisine</string>
+    <string name="restaurant_rosmarino_details">Trattoria Rosmarino serves authentic Ligurian dishes in a warm and inviting setting.</string>
+
+    <string name="restaurant_le_rune_title">Le Rune</string>
+    <string name="restaurant_le_rune_subtitle">Cozy and romantic</string>
+    <string name="restaurant_le_rune_details">Le Rune is a romantic spot perfect for date nights, known for its intimate vibe and fine cuisine.</string>
+
+    <string name="restaurant_eataly_title">Eataly</string>
+    <string name="restaurant_eataly_subtitle">Sea view and variety</string>
+    <string name="restaurant_eataly_details">Eataly offers a wide variety of dishes with a spectacular sea view experience.</string>
+
+    <!-- Parks -->
+    <string name="park_villetta_di_negro_title">Villetta Di Negro</string>
+    <string name="park_villetta_di_negro_subtitle">Scenic hilltop park</string>
+    <string name="park_villetta_di_negro_details">Villetta Di Negro is a scenic park atop a hill, perfect for walks and city views.</string>
+
+    <string name="park_parco_villetta_title">Parco della Villetta</string>
+    <string name="park_parco_villetta_subtitle">Quiet &amp; green</string>
+    <string name="park_parco_villetta_details">Parco della Villetta offers a peaceful, green space ideal for relaxing strolls or picnics.</string>
+
+    <!-- Shopping Centers -->
+    <string name="shop_fiumara_title">Fiumara Shopping Center</string>
+    <string name="shop_fiumara_subtitle">Massive shopping area</string>
+    <string name="shop_fiumara_details">Fiumara is a massive shopping complex with a wide range of stores and entertainment.</string>
+
+    <string name="shop_mercato_orientale_title">Mercato Orientale</string>
+    <string name="shop_mercato_orientale_subtitle">Indoor traditional market</string>
+    <string name="shop_mercato_orientale_details">Mercato Orientale is a vibrant indoor market offering local produce and traditional foods.</string>
+
+    <!-- Kid-Friendly Places -->
+    <string name="kids_citta_dei_bambini_title">Città dei Bambini</string>
+    <string name="kids_citta_dei_bambini_subtitle">Interactive science museum for kids</string>
+    <string name="kids_citta_dei_bambini_details">Città dei Bambini is an interactive museum with science exhibits tailored for kids.</string>
+
+    <string name="kids_righi_title">Parco Avventura Righi</string>
+    <string name="kids_righi_subtitle">Adventure park with zip lines</string>
+    <string name="kids_righi_details">Parco Avventura Righi offers high ropes, zip lines, and outdoor fun for kids and families.</string>
+
+    <string name="kids_acquario_title">Acquario di Genova</string>
+    <string name="kids_acquario_subtitle">Aquarium with marine life shows</string>
+    <string name="kids_acquario_details">The Acquario di Genova features marine life exhibits and educational shows, great for children.</string>
+</resources>
