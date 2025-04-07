@@ -68,6 +68,14 @@ fun RecommendedPlacesApp(
 ) {
     val viewModel: RecommendedPlacesViewModel = viewModel()
     val uiState by viewModel.uiState.collectAsState()
+    BackHandler(enabled = uiState.category != null) {
+        if (!uiState.isShowingListPage) {
+            viewModel.navigateToListPage()
+        } else {
+            viewModel.selectCategory(null)
+        }
+    }
+
     val contentType = when (windowSize) {
         WindowWidthSizeClass.Compact, WindowWidthSizeClass.Medium -> ContentType.ListOnly
         WindowWidthSizeClass.Expanded -> ContentType.ListAndDetail
@@ -165,7 +173,8 @@ fun RecommendedPlacesAppBar(
     category: PlaceCategory?,
     modifier: Modifier = Modifier
 ) {
-    val isBackButtonVisible = windowSize != WindowWidthSizeClass.Expanded && (category != null)
+    // val isBackButtonVisible = windowSize != WindowWidthSizeClass.Expanded && (category != null)
+    val isBackButtonVisible = category != null
 
     TopAppBar(
         title = {
